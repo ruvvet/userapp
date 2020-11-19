@@ -1,9 +1,10 @@
 const db = require('./models');
 
 //create[Model]
-//get[Model]
+//get[Model]s >> has an s at the end
 //set[Model]
 //add[Model]
+// CAPITALIZATION MATTERS
 
 ///////////////////////////////////////////////////////
 // ONE TO MANY
@@ -70,16 +71,17 @@ const db = require('./models');
 //   });
 // });
 
-// //FINDING ONE PET ??????????
-db.pet.findOne({
-    where: {name:'pepper'}
-}).then((pet)=>{
-    // pet.getUser().then((user)=>{
-    //     console.log('user', user.get())
-    // })
-console.log('pet', pet);
+// //FINDING ONE PET
 
-});
+// db.pet.findOne({
+//     where: {name:'Ein'}
+// }).then((pet)=>{
+//     // pet.getUser().then((user)=>{
+//     //     console.log('user', user.get())
+//     // })
+// console.log('pet', pet.get());
+
+// });
 
 // // ASSIGNING A created PET TO A USER
 // // instead of giving a pet a user
@@ -99,27 +101,27 @@ console.log('pet', pet);
 
 
 
-// FIND OR CREAATE
-//creates a new row if it doesnt exist
-// 1. first find the pet to assign the toy to
-db.pet.findOrCreate({
-    where: {
-      name: 'Ein',
-    },
-    defaults: { //??????????????????????
-      description: 'Traumatised by a very jealous toy aussie, Simba is very cute but rarely comes out to play'
-    }
-  })
-  // A FIND OR CREATE NEEDS TO PASS AN ARGUMENT THAT IS AN ARRAY
-  // use .spread in place of .then
-  .then(([pet, created])=>{
-    db.user.findOne()
-    .then(user=>{
-      //associate previously loaded pet instance
-      user.addPet(pet);
-      console.log('User ' + user.firstName + ' is the owner of ' + pet.name);
-    })
-})
+// // FIND OR CREAATE
+// //creates a new row if it doesnt exist
+// // 1. first find the pet to assign the toy to
+// db.pet.findOrCreate({
+//     where: {
+//       name: 'Ein',
+//     },
+//     defaults: { //??????????????????????
+//       description: 'Traumatised by a very jealous toy aussie, Simba is very cute but rarely comes out to play'
+//     }
+//   })
+//   // A FIND OR CREATE NEEDS TO PASS AN ARGUMENT THAT IS AN ARRAY
+//   // use .spread in place of .then
+//   .then(([pet, created])=>{
+//     db.user.findOne()
+//     .then(user=>{
+//       //associate previously loaded pet instance
+//       user.addPet(pet);
+//       console.log('User ' + user.firstName + ' is the owner of ' + pet.name);
+//     })
+// })
 
 
 
