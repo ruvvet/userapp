@@ -7,18 +7,19 @@ const db = require('./models');
 // inside the 'db' database >> and inside the 'user' table >> create
 // pass object
 //////////////
-// db.user.create({
-//     //this is a promise
-//     // uses the key:value pairs and matches them to fields in the table
-//     firstName: 'ABCaaa',
-//     lastName: 'DEFaaa',
+db.user.create({
+    //this is a promise
+    // uses the key:value pairs and matches them to fields in the table
+    firstName: 'ABCaaa',
+    lastName: 'DEFaaa',
+    
 
-// }).then(createdUser => {
-// // the promise returns data values, created..etc...
-// // calling .get() on the returned value shows just the obj itself
-// console.log(createdUser.get());
+}).then(createdUser => {
+// the promise returns data values, created..etc...
+// calling .get() on the returned value shows just the obj itself
+console.log(createdUser.get());
 
-// });
+});
 
 // findOne
 // querying THE FIRST match
@@ -36,16 +37,13 @@ db.user
 
 // findAll
 // gets back all matches
-db.user
-  .findAll
-  //no query parameters passed
-  ()
-  .then((allUsers) => {
-    //console.log(allUsers); //just return the object
-    allUsers.forEach((user) => {
-      console.log(user.get());
-    });
+  //no query parameters passed for findall
+db.user.findAll().then((allUsers) => {
+  //console.log(allUsers); //just return the object
+  allUsers.forEach((user) => {
+    console.log(user.get());
   });
+});
 
 //update/PUT
 db.user
@@ -54,16 +52,19 @@ db.user
     { lastName: 'XYZ' }, //pass the update function an object containg what needs to
     { where: { firstName: 'ABCaaa' } }
   )
-  .then((numRowChanged) => { // only returns the # of rows updated
+  .then((numRowChanged) => {
+    // only returns the # of rows updated
     console.log(numRowChanged);
   });
 
-
-  //deleting
-  db.user.destroy({
-      where: {firstName: 'ABCaaa'}
-  }).then((numRowDel) => { // only returns the # of rows updated
+//deleting
+db.user
+  .destroy({
+    where: { firstName: 'ABCaaa' },
+  })
+  .then((numRowDel) => {
+    // only returns the # of rows updated
     console.log(numRowDel);
   });
 
-  //.thens are not necessary - they are just here to show what's going on
+//.thens are not necessary - they are just here to show what's going on
