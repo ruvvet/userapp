@@ -73,48 +73,48 @@ const db = require('./models');
 
 // // ADD A PET TO A TOY IF THERES NO PET FOR IT YET
 
-// db.toy
-//   .findOrCreate({
-//     // first find a toy OR create if it doesnt exist
-//     where: { type: 'ball', color: 'green' },
-//   })
-//   .then(function ([toy, created]) {
-//     // so we either found /created the toy
-//     // now we get all the pets
-//     toy
-//       .getPets()
-//       // which returns an array of pets that have this toy
-//       .then(function (pets) {
-//         // so we have an array of all pets with the toy
-//         if (pets.length > 0) {
-//           // for each pet with the toy, do something.
-//           pets.forEach(function (pet) {
-//             console.log(pet.name, toy.color, toy.type);
-//           });
-//         } else {
-//           // else the array is empty and no pets have the toy
-//           // so we findOrCreate a Pet and add it to the toy
-//           db.pet
-//             .findOrCreate({ // find a create a pet for the toy
-//               where: {
-//                 name: 'Sun',
-//                 species: 'Bird',
-//               },
-//             })
-//             .then(function ([pet, created]) { // add the toy to the pet
-//               toy.addPet(pet).then(function (relationInfo) {
-//                 console.log(
-//                   pet.name,
-//                   'has faved the',
-//                   toy.color,
-//                   toy.type,
-//                   'toy'
-//                 );
-//               });
-//             });
-//         }
-//       });
-//   });
+db.toy
+  .findOrCreate({
+    // first find a toy OR create if it doesnt exist
+    where: { type: 'ball', color: 'green' },
+  })
+  .then(function ([toy, created]) {
+    // so we either found /created the toy
+    // now we get all the pets
+    toy
+      .getPets()
+      // which returns an array of pets that have this toy
+      .then(function (pets) {
+        // so we have an array of all pets with the toy
+        if (pets.length > 0) {
+          // for each pet with the toy, do something.
+          pets.forEach(function (pet) {
+            console.log(pet.name, toy.color, toy.type);
+          });
+        } else {
+          // else the array is empty and no pets have the toy
+          // so we findOrCreate a Pet and add it to the toy
+          db.pet
+            .findOrCreate({ // find a create a pet for the toy
+              where: {
+                name: 'Sun',
+                species: 'Bird',
+              },
+            })
+            .then(function ([pet, created]) { // add the toy to the pet
+              toy.addPet(pet).then(function (relationInfo) {
+                console.log(
+                  pet.name,
+                  'has faved the',
+                  toy.color,
+                  toy.type,
+                  'toy'
+                );
+              });
+            });
+        }
+      });
+  });
 
 
 //   // GET ALL TOYS OF A PET
